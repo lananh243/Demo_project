@@ -149,6 +149,10 @@ public class Employee {
                 " - Phòng ban nhân viên: " + department ;
     }
 
+    public void setDepartment(String depId) {
+
+    }
+
     public void getDepartment(String depId) {
     }
 }

@@ -9,7 +9,6 @@ import validate.ValidatorDepartment;
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class DepartmentUI {
     private final DepartmentService departmentService;
@@ -116,6 +115,7 @@ public class DepartmentUI {
                 System.out.println("3. Cập nhật trạng thái phòng ban");
                 System.out.println("4. Thoát");
                 int updateChoice = Validator.validateInputInterger(scanner, "Nhập lựa chọn: ");
+                scanner.nextLine();
                 switch (updateChoice) {
                     case 1:
                         String newDepName = ValidatorDepartment.validateDepartmentName(scanner, "Nhập tên phòng ban mới: ", new StringRule(10, 100));
@@ -169,7 +169,7 @@ public class DepartmentUI {
     }
 
     public void searchDepartment(Scanner scanner) {
-        String dep_name = ValidatorDepartment.validateDepartmentName(scanner, "Nhập vào tên phòng ban cần tìm kiếm: ", new StringRule(10, 100));
+        String dep_name = Validator.validateInputString(scanner, "Nhập vào tên phòng ban cần tìm kiếm: ");
         Department department = new Department();
         department.setDep_name(dep_name);
         List<Department> result = departmentService.searchDepartment(department);

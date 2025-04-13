@@ -14,13 +14,15 @@ public class ValidatorEmployee {
         while (true) {
             System.out.println(message);
             try {
-                String id = scanner.nextLine().trim();
+                String id = scanner.nextLine();
                 if (id.isEmpty()) {
                     System.err.println("Mã nhân viên không được để trống");
+                    continue;
                 }
 
-                if (!id.matches("(E)\\w{4}")) {
+                if (!id.matches("(E)\\d{4}")) {
                     System.err.println("Dữ liệu không đúng định dạng, vui lòng nhập lại");
+                    continue;
                 }
                 return id;
             } catch (Exception e) {
@@ -36,6 +38,7 @@ public class ValidatorEmployee {
                 String name = scanner.nextLine().trim();
                 if (name.isEmpty()) {
                     System.err.println("Tên nhân viên không được để trống");
+                    continue;
                 }
 
                 return name;
@@ -52,10 +55,12 @@ public class ValidatorEmployee {
                 String email = scanner.nextLine().trim();
                 if (email.isEmpty()) {
                     System.err.println("Email không được để trống");
+                    continue;
                 }
 
                 if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
                     System.err.println("Dữ liệu nhập vào không đúng định dạng, vui lòng nhập lại");
+                    continue;
                 }
                 return email;
             } catch (Exception e) {
@@ -72,10 +77,12 @@ public class ValidatorEmployee {
 
                 if (phone.isEmpty()) {
                     System.err.println("Số điện thoại không được để trống");
+                    continue;
                 }
 
                 if (!phone.matches("(" + PHONE_VIETTEL_PREFIXES + "|" + PHONE_VINAPHONE_PREFIXES + "|" + PHONE_MOBIFONE_PREFIXES +")\\d{7}")) {
                     System.err.println("Dữ liệu nhập vào không đúng định dạng, vui lòng nhập lại");
+                    continue;
                 }
                 return phone;
             } catch (Exception e) {
@@ -91,6 +98,7 @@ public class ValidatorEmployee {
                 int salary = Integer.parseInt(scanner.nextLine());
                 if (salary < 0) {
                     System.err.println("Bậc lương phải có giá trị > 0");
+                    continue;
                 }
 
                 return salary;
@@ -107,6 +115,7 @@ public class ValidatorEmployee {
                 double salary = Double.parseDouble(scanner.nextLine());
                 if (salary < 0) {
                     System.err.println("Lương phải có giá trị > 0");
+                    continue;
                 }
 
                 return salary;

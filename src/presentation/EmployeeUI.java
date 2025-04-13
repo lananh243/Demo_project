@@ -1,6 +1,5 @@
 package presentation;
 
-import business.model.Department;
 import business.model.Employee;
 import business.model.Gender;
 import business.model.StatusEmp;
@@ -34,6 +33,7 @@ public class EmployeeUI {
             System.out.println("6. Sắp xếp nhân viên");
             System.out.println("7. Thoát");
             int choice = Validator.validateInputInterger(scanner, "Lựa chọn của bạn: ");
+            scanner.nextLine();
             switch (choice) {
                 case 1:
                     employeeUI.getEmployeeByPage(scanner);
@@ -82,19 +82,17 @@ public class EmployeeUI {
 
     public void addEmployee(Scanner scanner){
         int size = Validator.validateInputInterger(scanner, "Nhập vào số lượng nhân viên cần thêm mới: ");
+
+        boolean allAdded = true;
         for (int i = 0; i < size; i++) {
             System.out.println("=== Nhập thông tin nhân viên thứ " + (i + 1) + " ===");
             Employee employee = new Employee();
             employee.inputData(scanner);
-            employeeService.addEmployee(employee);
-        }
-        boolean allAdded = true;
-        for (Employee emp : employeeService.getAllEmployees()) {
-            if (!employeeService.addEmployee(emp)) {
+
+            if (!employeeService.addEmployee(employee)) {
                 allAdded = false;
             }
         }
-
         if (allAdded) {
             System.out.println("Thêm mới nhân viên thành công!");
         } else {
@@ -119,6 +117,7 @@ public class EmployeeUI {
                 System.out.println("9. Cập nhật phòng ban cho nhân viên");
                 System.out.println("10. Thoát");
                 int updateChoice = Validator.validateInputInterger(scanner, "Lựa chọn của bạn là: ");
+                scanner.nextLine();
                 switch (updateChoice) {
                     case 1:
                         String newEmpName = ValidatorEmployee.validateEmployeeName(scanner, "Nhập tên nhân viên mới: ", new StringRule(15, 150));
@@ -175,7 +174,7 @@ public class EmployeeUI {
     }
 
     public void deleteEmployee(Scanner scanner) {
-        String emp_id = Validator.validateInputString(scanner, "Nhập vào mã nhân viên cần xóa: ");
+        String emp_id = ValidatorEmployee.validateEmployeeId(scanner, "Nhập vào mã nhân viên cần xóa: ");
         if (employeeService.getEmployeeById(emp_id) != null) {
             Employee employee = new Employee();
             employee.setEmp_id(emp_id);
@@ -183,7 +182,7 @@ public class EmployeeUI {
             if (result) {
                 System.out.println("Xóa nhân viên thành công");
             } else {
-                System.err.println("Có lỗi trong quá trình xóa");
+                System.err.println("Không thể xóa phòng ban vì vẫn còn nhân viên hoặc có lỗi xảy ra.");
             }
         } else {
             System.err.println("Không tồn tại mã nhân viên"+emp_id);
@@ -197,6 +196,7 @@ public class EmployeeUI {
             System.out.println("2. Tìm kiếm nhân viên theo khoảng tuổi");
             System.out.println("3. Thoát");
             int choice = Validator.validateInputInterger(scanner, "Lựa chọn của bạn: ");
+            scanner.nextLine();
             switch (choice) {
                 case 1:
                     searchEmployeeByName(scanner);
@@ -247,6 +247,7 @@ public class EmployeeUI {
             System.out.println("2. Tên nhân viên tăng dần");
             System.out.println("3. Thoát");
             int choice = Validator.validateInputInterger(scanner, "Lựa chọn của bạn: ");
+            scanner.nextLine();
             switch (choice) {
                 case 1:
                     sortEmployeeBySalary();

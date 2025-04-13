@@ -6,10 +6,7 @@ import business.model.Employee;
 import business.model.Gender;
 import business.model.StatusEmp;
 
-import java.sql.CallableStatement;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +25,12 @@ public class EmployeeDaoImp implements EmployeeDao {
             callSt.setString(1, employee.getEmp_name());
             callSt.setString(2, employee.getEmail());
             callSt.setString(3, employee.getPhoneNumber());
-            callSt.setString(4, String.valueOf(employee.getGender()));
+            callSt.setString(4, (employee.getGender().name()));
             callSt.setInt(5, employee.getLevelSalary());
             callSt.setDouble(6, employee.getSalary());
-            callSt.setString(7, String.valueOf(employee.getDateOfBirth()));
+            callSt.setDate(7, Date.valueOf(employee.getDateOfBirth()));
             callSt.setString(8, employee.getAddress());
-            callSt.setString(9, String.valueOf(employee.getEmp_status()));
+            callSt.setString(9, (employee.getEmp_status().name()));
             callSt.setInt(10, employee.getDepartment().getDep_id());
 
             callSt.executeUpdate();
